@@ -7,7 +7,7 @@ const str = 'hello world'
 // console.log( str.toUpperCase() )
 // console.log( str.slice(3) )
 
-function capitalize(str){
+function capitalize(str) {
     const first = str[0].toUpperCase()
     const rest = str.slice(1)
     return first+rest
@@ -20,14 +20,14 @@ function allCaps(str){
 
 // challenge 3
 
-function capitalizeWords(str){
+function capitalizeWords(str) {
     const words = str.split(' ')
     const upperWord = words.map( word => capitalize(word) )
     return upperWord.join(' ')
 }
 
 // challenge 4
-function removeExtraSpaces(str){
+function removeExtraSpaces(str) {
     const trimmed = str.trim()
     const chars = trimmed.split(' ')
     const filtered = chars.filter( (c) => c !== '' )
@@ -36,7 +36,7 @@ function removeExtraSpaces(str){
 // const sample = '   Hello    world!   '
 
 // challenge 5
-function kebobCase(str){
+function kebobCase(str, seporator = '-') {
     //  lowercase
     const lower = str.toLowerCase()
     // split ''
@@ -48,7 +48,7 @@ function kebobCase(str){
             return true
         } else if (code > 47 && code < 58) { //keep number
             return true
-        } else if (code === 32 || code === 45) { //keep space and hyphen
+        } else if (code === 32 || code === seporator.charAt(0)) { //keep space and hyphen
             return true
         }
         return false
@@ -56,12 +56,32 @@ function kebobCase(str){
     // remove extra spaces
     const spaceFree = removeExtraSpaces(filter.join(' '))
     // split, join, return
-    return spaceFree.split(' ').join('-')
+    return spaceFree.split(' ').join(seporator)
+}
+
+// challenge 6
+function snake(str) {
+    return kebobCase(str, '_')
+}
+
+// challenge 7
+function camelCase(str) {
+    // split on ' '
+    const words = str.split(' ')
+    // loop over the words
+    const camelWords = words.map((word, i) => {
+        // lowercase first word
+        if (i === 0) {
+            return word.toLowerCase( )
+        }
+        // uppercase other words
+        return capitalize(word)
+    })
+    // join words on ''
+    return camelWords.join('')
 }
 
 
-
-// 
 
 // // test functions:
 // challenge 1 testing:
@@ -79,6 +99,15 @@ function kebobCase(str){
 // challenge 4 testing:
 // console.log(removeExtraSpaces(sample))
 
-// challenge 5 testing:
-// const testStr = '    hello   world!!! a-weird-word  1, 2, 4 ,5 and 88'
-// console.log(kebobCase(testStr))
+// challenge 5/6 testing:
+// const testStr = '    hello   world a-weird-word  1, 2, 4 ,5 and 88'
+// console.log(snake(testStr))
+
+// challenge 7 testing:
+// const testStr = 'Hello world foo bar'
+
+// console.log(camelCase(testStr))
+
+
+// work on connecting your npm to website 
+// complete 8-11 challenges 
